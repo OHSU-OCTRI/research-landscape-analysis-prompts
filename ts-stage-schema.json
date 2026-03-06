@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orctri.org/schemas/ts-stage-bedrock-output.json",
+  "title": "AWS Bedrock Model Translational Science Stage Output Schema",
+  "description": "Schema for structuring output from AWS Bedrock models, including translational science stages and model thinking",
+  "type": "object",
+  "properties": {
+    "ts_stages": {
+      "type": "array",
+      "description": "Array of translational science stages or 'Unknown' if stage cannot be determined",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["T0", "T1", "T2", "T3", "T4", "Unknown"]
+      }
+    },
+    "model_thinking": {
+      "type": "string",
+      "description": "Markdown-formatted text containing the thinking process from the Bedrock model. This should include the rationale for the assigned translational science stages and any relevant evidence or reasoning. The text should be concise and focused on explaining the model's decision-making process along with any uncertainties or limitations.",
+      "maxLength": 500
+    }
+  },
+  "required": ["ts_stages", "model_thinking"],
+  "additionalProperties": false
+}

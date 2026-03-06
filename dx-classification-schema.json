@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orctri.org/schemas/disease-classification-bedrock-output.json",
+  "title": "AWS Bedrock Model Disease Classification Output Schema",
+  "description": "Schema for structuring output from AWS Bedrock models, including disease classification and model thinking",
+  "type": "object",
+  "properties": {
+    "dx_classes": {
+      "type": "object",
+      "description": "Object that specifies the top 3 levels of the MeSH hierarchy for the disease classification",
+      "properties": {
+        "level1": {
+          "enum": [
+            "Infections",
+            "Neoplasms",
+            "Musculoskeletal Diseases",
+            "Digestive System Diseases",
+            "Stomatognathic Diseases",
+            "Respiratory Tract Diseases",
+            "Otorhinolaryngologic Diseases",
+            "Nervous System Diseases",
+            "Eye Diseases",
+            "Urogenital Diseases",
+            "Cardiovascular Diseases",
+            "Hemic and Lymphatic Diseases",
+            "Congenital, Hereditary, and Neonatal Diseases and Abnormalities",
+            "Skin and Connective Tissue Diseases",
+            "Nutritional and Metabolic Diseases",
+            "Endocrine System Diseases",
+            "Immune System Diseases",
+            "Disorders of Environmental Origin",
+            "Animal Diseases",
+            "Pathological Conditions, Signs and Symptoms",
+            "Occupational Diseases",
+            "Chemically-Induced Disorders",
+            "Wounds and Injuries",
+            "Unknown"
+          ],
+          "description": "Top-level MeSH Disease Category"
+        },
+        "level2": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Intermediate Disease System / Class or 'Unknown' if not applicable"
+        },
+        "level3": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific Disease Group or Condition or 'Unknown' if not applicable"
+        }
+      },
+      "required": ["level1", "level2", "level3"]
+    },
+    "confidence": {
+      "enum": ["Low", "Medium", "High"],
+      "description": "Confidence level of the disease classification"
+    },
+    "evidence_terms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of key terms or phrases from the input that supported the classification"
+    },
+    "model_thinking": {
+      "type": "string",
+      "description": "1 to 2 sentences about ambiguity or limitations in the classification",
+      "maxLength": 500
+    }
+  },
+  "required": ["dx_classes", "confidence", "evidence_terms", "model_thinking"],
+  "additionalProperties": false
+}
