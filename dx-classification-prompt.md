@@ -35,6 +35,7 @@ IMPORTANT CONSTRAINTS:
 
 Use the following JSON schema to structure your output. Be sure to include the "model_thinking" field with your justification, and populate the "evidence_terms" field with the specific input terms that supported your classification.
 
+```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://orctri.org/schemas/disease-classification-bedrock-output.json",
@@ -112,5 +113,6 @@ Use the following JSON schema to structure your output. Be sure to include the "
   "required": ["dx_classes", "confidence", "evidence_terms", "model_thinking"],
   "additionalProperties": false
 }
+```
 
 Input MeSH terms: {{mesh_terms}}
